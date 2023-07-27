@@ -16,15 +16,22 @@ cat << "EOF"
                    
  
 EOF
-apt install -y xxd
 
-Random1=$(xxd -l 32 -c 32 -p < /dev/random | md5sum | head -c 20)
-Random2=$(xxd -l 32 -c 32 -p < /dev/random | md5sum | head -c 20)
-Random3=$(xxd -l 32 -c 32 -p < /dev/random | md5sum | head -c 20)
+chars=adcdefghijklmnopqrstuvwxyz
+function random_word() {
+	for i in {1..20} ;
+   	do
+   		echo -n "${chars:RANDOM%${#chars}:1}"; 
+   	done; 
+    	echo ${1}
+}
+Random1=$(random_word 1)
+Random2=$(random_word 2)
+Random3=$(random_word 3)
 
 apt install -y docker.io
 
-custom1=$(xxd -l 32 -c 32 -p < /dev/random | md5sum | head -c 20)
+custom1=$(random_word 4)
 
 sudo git clone --recurse-submodules https://github.com/assume-breach/Covenant.git /opt/Covenant
 
