@@ -16,6 +16,7 @@ cat << "EOF"
                    
  
 EOF
+apt install -y xxd
 
 Random1=$(xxd -l 32 -c 32 -p < /dev/random | md5sum | head -c 20)
 Random2=$(xxd -l 32 -c 32 -p < /dev/random | md5sum | head -c 20)
